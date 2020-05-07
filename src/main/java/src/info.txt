@@ -1,0 +1,341 @@
+http://asciiflow.com/
+https://refactoring.guru/design-patterns/
+
+Strategy
+========================================================================
+Strategy is a behavioral design pattern that lets you define a family of 
+algorithms, put each of them into a separate class, and make their 
+objects interchangeable.
+
+
++--------------------------------+                             +-----------------+
+|            Context             |                             |  <<interface>>  |
++--------------------------------+                           * |    Strategy     |
+| - strategy                     |---------------------------->------------------+
++--------------------------------+                             | + execute(data) |
+| + setStrategy(strategy)        |                             +-----------------+
+| + doSomethingWithTheStrategy() |                                      ^
++--------------------------------+                                      |
+                ^                                                       |
+                |                                 +------------------------------------------------+
+                |                                 |                     |                          |
+                |                                 |                     |                          |
+                |                    +----------------------+  +----------------------+  +----------------------+
+                |                    |  ConcreteStrategies  |  |  ConcreteStrategies  |  |  ConcreteStrategies  |
+           +----+-----+              +----------------------+  +----------------------+  +----------------------+
+           |  Client  +------------->|                      |  |                      |  |                      |
+           +----------+              +-+--------------------+  +-+--------------------+  +-+--------------------+
+                                     | + execute(data)      |  | + execute(data)      |  | + execute(data)      |
+                                     +-+--------------------+  +-+--------------------+  +-+--------------------+
+
+
+
+
+Observer
+========================================================================
+Observer is a behavioral design pattern that lets you define a 
+subscription mechanism to notify multiple objects about any events that 
+happen to the object they’re observing.
+
+
++--------------------------------+                             +-----------------+
+|         Publisher              |                             |  <<interface>>  |
++--------------------------------+                             |    Subscriber   |
+| - subscribers: Subscriber[]    +---------------------------->+-----------------+
+| - mainState                    |                             | + update()      |
++--------------------------------+                             +-+------+--------+
+| + subscribe(s: Subscriber)     |                                      ^
+| + unsubscribe(s: Subscriber)   |                                      |
+| + notifySubscribers()          |                                      |
+| + mainBusinessLogic()          |                +----------------------<-------------------------+
++-+--------------+---------------+                |                     |                          |
+                 ^                                |                     |                          |
+                 |                   +------------+---------+  +--------+-------------+  +---------+------------+
+                 |                   |  ConcreteSubscribers |  |  ConcreteSubscribers |  |  ConcreteSubscribers |
+           +-----+----+              +----------------------+  +----------------------+  +----------------------+
+           |  Client  |              |                      |  |                      |  |                      |
+           +----------+              +-+--------------------+  +-+--------------------+  +-+--------------------+
+                                     | + update(publisher)  |  | + update(publisher)  |  | + update(publisher)  |
+                                     +-+--------------------+  +-+--------------------+  +-+--------------------+
+
+
+
+
+Factory Method
+========================================================================
+Factory Method is a creational design pattern that provides an interface 
+for creating objects in a superclass, but allows subclasses to alter the 
+type of objects that will be created.
+
+
+                      +---------------------------+                                      +----------------+         
+                      |          Creator          |                                      | <<interface>>  |         
+                      -----------------------------                                      |    Product     |         
+                      |+ someOperation()          |------------------------------------->|-----------------         
+                      |+ createProduct(): Product |                                      |                |         
+                      |                           |                                      |                |         
+                      +---------------------------+                                      +----------------+         
+                                    ^                                                             ^
+                                    |                                                             |                 
+                 -------------------+------------------                                  ---------+----------       
+                 |                                    |                                  |                  |       
+                 |                                    |                                  |                  |       
+                 |                                    |                                  |                  |       
++---------------------------------+   +------------------------------+            +-------------+   +--------------+
+|       ConcreteCreatorA          |   |       ConcreteCreatorB       |            |  Concrete   |   |   Concrete   |
+-----------------------------------   --------------------------------            |  ProductA   |   |   ProductB   |
+|+ createProduct(): Product       |   |+ createProduct(): Product    |            +-------------+   +--------------+
+|                                 |   |                              |                                              
++---------------------------------+   +------------------------------+                                              
+                                                                                                                    
+
+Abstract Factory 
+========================================================================
+Abstract Factory is a creational design pattern that lets you produce 
+families of related objects without specifying their concrete classes.
+
+
+                                          +--------------------------------+
+                                          |        ConcreteFactory1        |
+                                          +--------------------------------+
+       +--------------------+-------------+                                |
+       |                    |             |  +createProductA(): ProductA   |
+       |                    |             |  +createProductB(): ProductB   |
+       v                    v             |                                |
++------+------+      +------+------+      +---------------+----------------+
+|  Concrete   |      | Concrete    |                      |
+|  ProductA1  |      | ProductB1   |                      |
++------+------+      +------+------+                      |
+       |                    |                             v
+       |                    |             +---------------+----------------+
+       |                    |             |       << interface >>          |
+       v                    v             |       AbstractFactory          |
++------+------+      +------+------+      +--------------------------------+
+|  ProductA   |      |  ProductB   |      |                                |
++------+------+      +------+------+      |  +createProductA(): ProductA   |
+       ^                    ^             |  +createProductB() :ProductB   |
+       |                    |             |                                |
+       |                    |             +---------------+----------------+
+       |                    |                             ^
++------+------+      +------+------+                      |
+| Concrete    |      | Concrete    |                      |
+| ProductA2   |      | ProductB2   |                      |
++------+------+      +------+------+      +---------------+----------------+
+       ^                    ^             |        ConcreteFactory2        |
+       |                    |             +--------------------------------+
+       |                    |             |                                |
+       +--------------------+-------------+  +createProductA(): ProductA   |
+                                          |  +createProductB(): ProductB   |
+                                          |                                |
+                                          +--------------------------------+
+
+
+
+Decorator
+========================================================================
+Decorator is a structural design pattern that lets you attach new 
+behaviors to objects by placing these objects inside special wrapper 
+objects that contain the behaviors.
+
+          +---------------+
+          | <<interface>> |
+          |   Component   |
+          +---------------+
+          |               |
+          | +execute()    |
+          |               |
+          +-------+-------+
+                  ^
+                  |
+        +--------------------------+
+        |                          |
+        |                          |
++-------+-------+    +-------------+--------------+
+| Concrete      |    |       <<interface>>        |
+| Component     |    |       Base Decorator       |
++---------------+    +----------------------------+
+|               |    |                            |
+| +execute()    |    |  +execute()                |
+|               |    |                            |
++---------------+    +-------------+--------------+
+                                   ^
+                                   |
+                                   |
+                             +-----+------+
+                             | Concrete   |
+                             | Decorator  |
+                             +------------+
+                             |            |
+                             | +execute() |
+                             |            |
+                             +------------+
+
+
+Singleton
+========================================================================
+The Singleton pattern solves two problems at the same time, violating 
+the Single Responsibility Principle:
+
+1. Ensure that a class has just a single instance.                                                                                                 
+2. Provide a global access point to that instance.
+
++----------------------------+
+|        Singleton           |<--+
++-----------------------------   |
+| - instance: Singleton      |   |
+| - Singleton()              +---+
++-+--------------------------|
+|                            |
+| + getInstance(): Singleton |
++-+--------------------------+
+
+
+Command
+========================================================================
+Command is a behavioral design pattern that turns a request into a 
+stand-alone object that contains all information about the request. 
+This transformation lets you parameterize methods with different 
+requests, delay or queue a request’s execution, and support undoable 
+operations.
+
+                +-----------------+               +-----------------------+
+                |  <<interface>>  |               |       Invoker         |
+                |    Command      |             n +-----------------------+
+                +-----------------+ <-------------+ command               |
+                |                 |               +-----------------------+
+                | +execute()      |               | setCommand(command)   |
+                |                 |               | executeCommand()      |
+                +--------+--------+               +-----------------------+
+                         ^
+                         |
+                         |
+            +------------+------------+
+            |                         |
+            |                         |
++-----------+---------+     +---------+------------+
+|       Command1      |     |      Command2        |
++---------------------+     +----------------------+
+| receiver1           |     | receiver2            |
++---------------------+     +----------------------+
+| Command1(receiver1) |     | Command2(receiver2)  |
+| execute()           |     | execute()            |
+|                     |     |                      |
++----------+----------+     +---------+------------+
+           |                          |
+           |                          |
+           v                          v
+   +-------+-------+          +-------+-------+
+   |   Receiver1   |          |   Receiver2   |
+   +---------------+          +---------------+
+   |               |          |               |
+   +---------------+          +---------------+
+
+
+Adapter
+========================================================================
+Converts the interface of one object so that another object can 
+understand it.
+An adapter wraps one of the objects to hide the complexity of conversion 
+happening behind the scenes. The wrapped object isn’t even aware of 
+the adapter. 
+It permits classes with incompatible interfaces to work together.
+
+
+
+                     +--------------------+
+                     |    <<interface>>   |
++----------+         |  Client Interface  |
+| Client   +-------->|--------------------+
++----------+         | + method(data)     |
+                     |                    |
+                     +--------------------+
+                               ^
+                               |
+                               |
+                     +--------------------+          +----------------------+
+                     |      Adapter       +--------->+      Service         |
+                     +--------------------+          +----------------------+
+                     | - adaptee: Service |          | ...                  |
+                     |                    |          |                      |
+                     +--------------------+          +----------------------+
+                     | + method(data)     |          | + serviceMethod(...) |
+                     |                    |          |                      |
+                     +--------------------+          +----------------------+
+
+- The Client is a class that contains the existing business logic of the program.
+- The Client Interface describes a protocol that other classes must follow to be
+able to collaborate with the client code.
+- The Service is some useful class (usually 3rd-party of legacy). The client can't
+use this class directly because it has an incompatible interface.
+- The Adapter is a class that is able to work with both the client and the service:
+it implements the client interface while wrapping the service object. The adapter
+receives calls from the client via the adapter interface and translates them into
+calls to the wrapped service object in a format it can understand.
+- The Client code doesn't get coupled to the concrete adapter class as long as it
+works with the adapter via the client interface.
+
+
+Facade
+========================================================================
+Structural design pattern that provides a simplified interface to a
+library, a framework, or any other complex set of classes.
+
+                    +-----------------------------+           +--------------------------+
+                    |           Facade            |           |    Additional Facade     |
+                    +-----------------------------+           +--------------------------+
++----------+        | - linksToSubsystemObjects   |---------->| ...                      |
+| Client   |------->| - optionalAdditionalFacade  |           |                          |
++----------+        +-----------------------------+           +--------------------------+
+                    | + subsystemOperation()      |           | + anotherOpertion()      |
+                    |                             |           |                          |
+                    +-----------------------------+           +--------------------------+
+                         |             |     |                        |
+                         |             |     |                        |
+                         |             |     |                        |
+                         |             |     +---------+              |
+                         |             |               |              |
+                         v             v               v              v                            
+                    +----+------+  +---+-------+  +-----------+  +----+------+
+                    | Subsystem |  | Subsystem |  | Subsystem |  | Subsystem |
+                    | class     |  | class     |  | class     |  | class     |
+                    |           |  |           |  |           |  |           |
+                    +-----------+  +-----------+  +-----------+  +-----------+
+
+* Facade defines a new interface for existing objects, whereas Adapter tries to make the 
+existing interface usable. Adapter usually wraps just one object, while Facade works 
+with an entire subsystem of objects.
+
+
+
+Template Method
+========================================================================
+Template Method is a behavioral design pattern that defines the skeleton 
+of an algorithm in the superclass but lets subclasses override specific 
+steps of the algorithm without changing its structure.
+
+         +----------------------+
+         |     AbstractClass    |
+         +----------------------+
+         | ...                  |     +----------------------+
+         +----------------------+     | templateMethod() {   |
+         | + templateMethod() --------|   step1();           |
+         | + step1()            |     |   if(step2()) {      |
+         | + step2()            |     |     step3()          |
+         | + step3()            |     |   }                  |
+         | + step4()            |     |   step4();           |
+         +-----------+----------+     | }                    |
+                     ^                +----------------------+
+                     |
+                     |
+         +-----------+-----------+
+         |                       |
++--------+--------+     +--------+--------+
+| ConcreteClass1  |     | ConcreteClass2  |
++-----------------+     +-----------------+
+| ...             |     | ...             |
++-+---------------+     +-+---------------+
+| + step3()       |     | + step1()       |
+| + step4()       |     | + step2()       |
++-----------------+     | + step3()       |
+                        | + step4()       |
+                        +-----------------+

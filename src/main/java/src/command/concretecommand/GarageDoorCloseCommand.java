@@ -1,0 +1,27 @@
+package src.command.concretecommand;
+
+import src.command.Command;
+import src.command.receptor.GarageDoor;
+
+/**
+ * GarageDoorCloseCommand
+ */
+public class GarageDoorCloseCommand implements Command {
+
+    GarageDoor garageDoor;
+
+    public GarageDoorCloseCommand(GarageDoor garageDoor) {
+        this.garageDoor = garageDoor;
+    }
+
+    @Override
+    public void execute() {
+        garageDoor.close();
+    }
+
+    @Override
+    public void undo() {
+        garageDoor.open();
+    }
+
+}
