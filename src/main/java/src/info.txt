@@ -339,3 +339,38 @@ steps of the algorithm without changing its structure.
 +-----------------+     | + step3()       |
                         | + step4()       |
                         +-----------------+
+
+Iterator
+========================================================================
+Iterator is a behavioral design pattern that lets you traverse elements 
+of a collection without exposing its underlying representation (list, 
+stack, tree, etc.).
+
+                             +--------+
+                  +----------+ Client +-------------+
+                  |          +--------+             |
+                  |                                 |
+                  |                                 |
+                  v                                 v
+         +-------------------+           +------------------------------+
+         |   <<interface>>   |           |        <<interface>>         |
+         |     Iterator      |           |      IterableCollection      |
+         +-------------------+           +------------------------------+
+         | + getNext()       |<----------| + createIterator(): Iterator |
+         | + hasMore(): bool |           +------------------------------+ 
+         +--------+----------+                          ^
+                  ^                                     |
+                  |                                     |
+                  |                                     |
+                  |                                     |
++-----------------+----------------+            +------------------------------+
+|    ConcreteIterator              |            |      ConcreteCollection      |
++----------------------------------+            +------------------------------+
+| - collection: ConcreteCollection |----------->| ...                          |
+| - iterationState                 |            +------------------------------+
++----------------------------------+            | ...                          |
+| + ConcreteIteration(             |            | + createIterator(): Iterator |
+|    c: ConcreteCollection)        |            +------------------------------+
+| + getNext()                      |
+| + hasMore(): bool                |
++----------------------------------+
