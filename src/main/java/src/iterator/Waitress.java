@@ -40,4 +40,5 @@ public class Waitress {
         Waitress waitress = new Waitress(menus);
         waitress.printMenu();
     }
+
 }
