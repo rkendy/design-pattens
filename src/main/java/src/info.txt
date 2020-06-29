@@ -412,3 +412,37 @@ individual objects.
                            +-------------------------------+
 
 
+
+
+State
+========================================================================
+State is a behavioral design pattern that lets an object alter its 
+behavior when its internal state changes. It appears as if the object 
+changed its class.
+
+
++--------------------------------+                             +-----------------+
+|            Context             |                             |  <<interface>>  |
++--------------------------------+                           * |      State      |
+| - state                        |---------------------------->------------------+
++--------------------------------+                             | + action1(data) |
+| + Context(initialState)        |                             | + action2(data) |
+| + Context(initialState)        |                             +-----------------+
+| + changeState(state)           |                                      ^
+| + action1(state)               |                                      |
+| + action2(state)               |                                      |
++--------------------------------+                                      |
+                                                                        |
+                                                  +------------------------------------------------+
+                                                  |                     |                          |
+                                                  |                     |                          |
+                                     +----------------------+  +----------------------+  +----------------------+
+                                     |  ConcreteStateA      |  |  ConcreteStateB      |  |  ConcreteStateC      |
+                                     +----------------------+  +----------------------+  +----------------------+
+                                     | - context            |  | - context            |  | - context            |
+                                     +-+--------------------+  +-+--------------------+  +-+--------------------+
+                                     | + setContext(ctx)    |  | + setContext(ctx)    |  | + setContext(ctx)    |
+                                     | + action1(data)      |  | + action1(data)      |  | + action1(data)      |
+                                     | + action2(data)      |  | + action2(data)      |  | + action2(data)      |
+                                     +-+--------------------+  +-+--------------------+  +-+--------------------+
+

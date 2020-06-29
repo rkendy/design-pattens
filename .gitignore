@@ -1,6 +1,7 @@
 .gradle
 build
 bin
+.settings/
 
 # Compiled class file
 *.class
