@@ -1,7 +1,8 @@
 package src.state.states;
 
-import src.state.State;
 import src.state.GumballMachine;
+import src.state.State;
+import src.state.GumBallState;
 
 public class HasQuarterState extends State {
 
@@ -17,17 +18,16 @@ public class HasQuarterState extends State {
     @Override
     public void ejectQuarter() {
         System.out.println("Quarter returned");
-        gumballMachine.setState(GumballMachine.StateEnum.NO_QUARTER);
+        gumballMachine.setState(GumBallState.NO_QUARTER);
     }
 
     @Override
     public void turnCrank() {
         gumballMachine.releaseBall();
         if (gumballMachine.getCount() > 0) {
-            gumballMachine.setState(GumballMachine.StateEnum.NO_QUARTER);
+            gumballMachine.setState(GumBallState.NO_QUARTER);
         } else {
-            System.out.println("Oops, out of gumballs");
-            gumballMachine.setState(GumballMachine.StateEnum.SOLD_OUT);
+            gumballMachine.setState(GumBallState.SOLD_OUT);
         }
     }
 

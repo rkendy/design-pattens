@@ -5,7 +5,7 @@ import src.state.State;
 
 public class SoldOutState extends State {
 
-    public SoldOutState(GumballMachine gumballMachine) {
+    public SoldOutState(final GumballMachine gumballMachine) {
         super(gumballMachine);
     }
 

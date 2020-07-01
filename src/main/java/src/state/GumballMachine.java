@@ -9,26 +9,21 @@ import src.state.states.SoldOutState;
 
 public class GumballMachine {
 
-    public static enum StateEnum {
-        SOLD_OUT, NO_QUARTER, HAS_QUARTER
-    };
-
     State state;
     int count = 0;
-    Map<StateEnum, State> map;
+    Map<GumBallState, State> map;
 
     GumballMachine(int numberOfGumballs) {
         map = new HashMap<>();
-        map.put(StateEnum.SOLD_OUT, new SoldOutState(this));
-        map.put(StateEnum.NO_QUARTER, new NoQuarterState(this));
-        map.put(StateEnum.HAS_QUARTER, new HasQuarterState(this));
-        // map.put(StateEnum.SOLD, new SoldState(this));
+        map.put(GumBallState.SOLD_OUT, new SoldOutState(this));
+        map.put(GumBallState.NO_QUARTER, new NoQuarterState(this));
+        map.put(GumBallState.HAS_QUARTER, new HasQuarterState(this));
 
         this.count = numberOfGumballs;
         if (numberOfGumballs > 0) {
-            setState(StateEnum.NO_QUARTER);
+            setState(GumBallState.NO_QUARTER);
         } else {
-            setState(StateEnum.SOLD_OUT);
+            setState(GumBallState.SOLD_OUT);
         }
     }
 
@@ -47,7 +42,7 @@ public class GumballMachine {
         state.turnCrank();
     }
 
-    public void setState(StateEnum state) {
+    public void setState(GumBallState state) {
         this.state = map.get(state);
     }
 
