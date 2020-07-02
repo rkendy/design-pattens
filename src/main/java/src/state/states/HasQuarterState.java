@@ -1,14 +1,9 @@
 package src.state.states;
 
-import src.state.GumballMachine;
 import src.state.State;
 import src.state.GumBallState;
 
 public class HasQuarterState extends State {
-
-    public HasQuarterState(GumballMachine gumballMachine) {
-        super(gumballMachine);
-    }
 
     @Override
     public void insertQuarter() {
@@ -18,16 +13,16 @@ public class HasQuarterState extends State {
     @Override
     public void ejectQuarter() {
         System.out.println("Quarter returned");
-        gumballMachine.setState(GumBallState.NO_QUARTER);
+        setState(GumBallState.NO_QUARTER);
     }
 
     @Override
     public void turnCrank() {
-        gumballMachine.releaseBall();
-        if (gumballMachine.getCount() > 0) {
-            gumballMachine.setState(GumBallState.NO_QUARTER);
+        releaseBall();
+        if (getCount() > 0) {
+            setState(GumBallState.NO_QUARTER);
         } else {
-            gumballMachine.setState(GumBallState.SOLD_OUT);
+            setState(GumBallState.SOLD_OUT);
         }
     }
 

@@ -1,13 +1,8 @@
 package src.state.states;
 
-import src.state.GumballMachine;
 import src.state.State;
 
 public class SoldOutState extends State {
-
-    public SoldOutState(final GumballMachine gumballMachine) {
-        super(gumballMachine);
-    }
 
     @Override
     public void insertQuarter() {

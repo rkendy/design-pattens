@@ -8,6 +8,7 @@ public class GumballMachineClient {
 
         gumballMachine.insertQuarter();
         gumballMachine.turnCrank();
+
     }
 
 }

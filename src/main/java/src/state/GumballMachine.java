@@ -1,23 +1,17 @@
 package src.state;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import src.state.states.HasQuarterState;
-import src.state.states.NoQuarterState;
-import src.state.states.SoldOutState;
+import java.util.EnumMap;
 
 public class GumballMachine {
 
     State state;
     int count = 0;
-    Map<GumBallState, State> map;
+    EnumMap<GumBallState, State> map = new EnumMap<>((GumBallState.class));
 
     GumballMachine(int numberOfGumballs) {
-        map = new HashMap<>();
-        map.put(GumBallState.SOLD_OUT, new SoldOutState(this));
-        map.put(GumBallState.NO_QUARTER, new NoQuarterState(this));
-        map.put(GumBallState.HAS_QUARTER, new HasQuarterState(this));
+        map.put(GumBallState.SOLD_OUT, GumBallState.SOLD_OUT.getImpl().register(this));
+        map.put(GumBallState.NO_QUARTER, GumBallState.NO_QUARTER.getImpl().register(this));
+        map.put(GumBallState.HAS_QUARTER, GumBallState.HAS_QUARTER.getImpl().register(this));
 
         this.count = numberOfGumballs;
         if (numberOfGumballs > 0) {
