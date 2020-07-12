@@ -1,7 +1,5 @@
 package src.abstractfactory;
 
-import src.abstractfactory.Pizza;
-
 public abstract class PizzaStore {
 
     public Pizza orderPizza(String type) {
