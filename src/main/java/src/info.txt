@@ -510,3 +510,39 @@ objects without making your code dependent on their classes.
                     | + SubclassPrototype(prototype)  |
                     | + clone(): Prototype            |
                     +---------------------------------+
+
+
+Bridge
+========================================================================
+Bridge is a structural design pattern that lets you split a large class or 
+a set of closely related classes into two separate hierarchies—abstraction 
+and implementation—which can be developed independently of each other.
+
+          +---------+
+          | Client  |
+          +----+----+
+               |
+               |
+ +------------------------------------------------------------- Bridge ------+
+ |             |                                                             |
+ |             v                                                             |
+ |     +---------------------+           +-----------------+                 |
+ |     |   Abstraction       |           |  <<interface>>  |                 |
+ |     +---------------------+           |  Implementation |                 |
+ |     | -i : Implementation +---------->|-----------------+                 |
+ |     +---------------------+           | + method1()     |                 |
+ |     | + feature1()        |           | + method2()     |                 |
+ |     | + feature2()        |           | + method3()     |                 |
+ |     +---------------------+           +-----------------+                 |
+ |             ^                                ^                            |
+ |             |                                |                            |
+ +---------------------------------------------------------------------------+
+               |                                |
+               |                                |
+      +--------+-------------+          +-----------------+
+      |  Refined Abstraction |          |   Concrete      |
+      +----------------------+          | Implementations |
+      | ...                  |          +-----------------+
+      +----------------------+          
+      | + featureN()         |
+      +----------------------+
