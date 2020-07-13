@@ -540,7 +540,7 @@ and implementation—which can be developed independently of each other.
                |                                |
                |                                |
       +--------+-------------+          +-----------------+
-      |  Refined Abstraction |          |   Concrete      |
+      |  Refined Abstraction |          |    Concrete     |
       +----------------------+          | Implementations |
       | ...                  |          +-----------------+
       +----------------------+          
