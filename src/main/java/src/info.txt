@@ -583,3 +583,55 @@ variations than the extrinsic.
    | + operation(uniqueState)  |                  | + operation()                          |
    +---------------------------+                  +----------------------------------------+
          Intrinsic                                              Extrinsic                                                  
+
+
+Builder
+========================================================================
+Builder is a creational design pattern that lets you construct complex
+objects step by step. The pattern allows you to produce different types
+and representations of an object using the same construction code.
+The Builder doesn’t allow other objects to access the product while it’s 
+being built.
+You can go further and extract a series of calls to the builder steps 
+you use to construct a product into a separate class called director. 
+The director class defines the order in which to execute the building 
+steps, while the builder provides the implementation for those steps.
+
+
+                           +--------+
+     +---------------------+ Client +--------------------+
+     |                     +--------+                    |
+     |                                                   |
+     |                                                   v
+     |           +-----------------+         +--------------------------+
+     |           |  <<interface>>  |<--------|       Director           |
+     |           |     Builder     |         +--------------------------+
+     |           +-----------------+         | - builder: Builder       |
+     |           | + reset()       |         +--------------------------+
+     |           | + buildStepA()  |         | + Director(builder)      |
+     |           | + buildStepB()  |         | + changeBuilder(builder) |
+     |           | + buildStepZ()  |         | + make(type)             |
+     |           +-----------------+         +--------------------------+
+     |                    ^
+     |                    |
+     |        +---------------------------+
+     |        |                           |
+     v        |                           |
++-------------------------+   +-------------------------+
+|       Concrete          |   |      Concrete           |
+|       Builder1          |   |      Builder2           |
++-------------------------+   +-------------------------+
+| - result: Product1      |   | - result: Product2      |
++-------------------------+   +-------------------------+
+| + reset()               |   | + reset()               |
+| + buildStepA()          |   | + buildStepA()          |
+| + buildStepB()          |   | + buildStepB()          |
+| + buildStepZ()          |   | + buildStepZ()          |
+| + getResult(): Product1 |   | + getResult(): Product2 |
++-+---------+-------------+   +-+---------+-------------+
+            |                             |
+            |                             |
+            v                             v
+       +------------+               +------------+
+       |  Product1  |               |  Product2  |
+       +------------+               +------------+
