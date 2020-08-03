@@ -635,3 +635,42 @@ steps, while the builder provides the implementation for those steps.
        +------------+               +------------+
        |  Product1  |               |  Product2  |
        +------------+               +------------+
+
+
+Chain of Responsibility
+========================================================================
+Chain of Responsibility is a behavioral design pattern that lets you 
+pass requests along a chain of handlers. Upon receiving a request, each 
+handler decides either to process the request or to pass it to the next 
+handler in the chain.
+
++-----------------------+
+|     <<interface>>     |             +----------+
+|        Handler        |<------------|  Client  |
++-----------------------+             +----------+
+| + setNext(h: Handler) |
+| + handle(request)     |
++-----------------------+
+            ^
+            |
+            |
+            |
+ +----------------------+
+ |     BaseHandler      |
+ +----------------------+
+ | - next: Handler      |
+ +----------------------+
+ | + setNext(h: Handler)|
+ | + handle(request)    |
+ +----------------------+
+            ^
+            |
+            |
+            |
+  +---------+-----------+
+  |  ConcreteHandlers   |
+  +---------------------+
+  | ...                 |
+  +---------------------+
+  | + handle(request)   |
+  +---------------------+
