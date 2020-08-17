@@ -719,3 +719,24 @@ object.
                              | - reactOnC()         |
                              | - reactOnD()         |
                              +----------------------+
+
+
+Memento
+========================================================================
+Memento is a behavioral design pattern that lets you save and restore 
+the previous state of an object without revealing the details of its 
+implementation.
+It delegates creating the state snapshots to the actual owner of that 
+state, the originator object.
+
+
++-----------------------------------------------------------+
+| +------------------------+         +------------------+   |      +------------------------+
+| |     Originator         |         |      Memento     |   |      |       Caretaker        |
+| +------------------------+         +------------------+   |      +------------------------+
+| | - state                |-------->| - state          |<---------| - originator           |
+| +------------------------+         +------------------+   |      | - history: Memento[]   |
+| | + save(): Memento      |         | + Memento(state) |   |      +------------------------+
+| | + restore(m: Memento)  |         | + getState()     |   |      | + doSomething()        |
+| +------------------------+         +------------------+   |      | + undo()               |
++-----------------------------------------------------------+      +------------------------+
