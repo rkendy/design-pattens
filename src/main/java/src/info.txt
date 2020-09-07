@@ -1,6 +1,35 @@
 http://asciiflow.com/
 https://refactoring.guru/design-patterns/
 
+
+OO:
+* Abstraction
+* Encapsulation
+* Polimorphism
+* Inheritance
+
+* Superate out parts of code that vary or change from those that remain the same.
+* Always code to an interface and not against a concrete implementation.
+* Encapsulate behaviors as much as possible.
+* Favor composition over inheritance.
+* Interacting components within a system should be as loosely coupled as possible.
+* Ideally, class design should be open for extension but closed for modification.
+
+* The Law of Demeter (the Principle of Least Knowledge).
+       Only talk to your immediate friends. Don't talk to strangers.
+* The Hollywood Principle
+       “Don’t Call Us, We’ll Call You"
+
+
+
+However, remember that making design flexible and extensible correspondingly increases 
+the complexity and understandability of the code base. One must walk a fine line between 
+the two competing objectives when designing and writing software.
+
+
+
+
+
 Strategy
 ========================================================================
 Strategy is a behavioral design pattern that lets you define a family of 
