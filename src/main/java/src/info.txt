@@ -627,6 +627,11 @@ The director class defines the order in which to execute the building
 steps, while the builder provides the implementation for those steps.
 
 
+* The builder pattern might seem similar to the abstract factory pattern 
+but one difference is that the builder pattern creates an object step by 
+step whereas the abstract factory pattern returns the object in one go.
+
+
                            +--------+
      +---------------------+ Client +--------------------+
      |                     +--------+                    |
@@ -806,3 +811,6 @@ from the objects on which they operate.
                                | + featureA()         |   | + featureB()         |
                                | + accept(v: Visitor) |   | + accept(v: Visitor) |
                                +----------------------+   +----------------------+
+
+
+
