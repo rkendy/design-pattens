@@ -1,7 +1,5 @@
 package src;
 
-import org.junit.Test;
-
 import src.factorymethod.client.chicagostyle.ChicagoStylePizzaStore;
 import src.factorymethod.client.nystyle.NYStylePizzaStore;
 import src.factorymethod.creator.PizzaStore;
